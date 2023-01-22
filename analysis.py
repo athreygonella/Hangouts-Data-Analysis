@@ -13,6 +13,20 @@ except FileNotFoundError:
 
 user_name = input('Welcome to Hangouts Wrapped!! What''s your name? ')
 
+# Construct Map [gaia ID -> name]
+ID_to_name = {}
+for conversation in data['conversations']:
+    participant_data = conversation['conversation']['conversation']['participant_data']
+
+    for participant in participant_data:
+        gaia_id = participant['id']['gaia_id']
+        if 'fallback_name' in participant.keys():
+            name = participant['fallback_name']
+            # Check that name isn't an email address
+            if '@' not in name:
+                ID_to_name[gaia_id] = name
+            
+
 # Map [Friend Name -> # of direct messages]
 messages_by_friend = {}
 
@@ -23,10 +37,14 @@ for conversation in data['conversations']:
     if conversation_type == 'STICKY_ONE_TO_ONE':
         # Direct Message
 
-        participant_names = [participant['fallback_name'] for participant in conversation_metadata['conversation']['participant_data'] if 'fallback_name' in participant.keys()]
+        participant_IDs = [participant['id']['gaia_id'] for participant in conversation_metadata['conversation']['participant_data']]
 
-        friend = next((name for name in participant_names if user_name not in name), None)
-
+        # Determine friend's name (None if a conversation invite from ID was never accepted)
+        friend = None
+        for id in participant_IDs:
+            if id in ID_to_name.keys() and user_name.lower() not in ID_to_name[id].lower():
+                friend = ID_to_name[id]
+        
         events = conversation['events']
 
         if friend is not None:
