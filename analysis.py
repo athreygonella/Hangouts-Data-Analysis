@@ -11,7 +11,7 @@ try:
 except FileNotFoundError:
     print('Takeout/Hangouts/Hangouts.json file was not found. Please make sure that the current directory contains Takeout directory')
 
-user_name = input('Welcome to Hangouts Wrapped!! What''s your name? ')
+user_name = input('\nWelcome to Hangouts Wrapped!! What''s your name? ')
 
 # Construct Map [gaia ID -> name]
 ID_to_name = {}
@@ -51,13 +51,22 @@ for conversation in data['conversations']:
             messages_by_friend[friend] = len(events)
 
 
-# Print results
+# Sort results
 sorted_messages_by_friend = dict(sorted(messages_by_friend.items(), key = lambda item: item[1], reverse=True))
 
-print("Here are your friends ranked by # of messages: ")
+# Print results
+print('\nHi ' + user_name + '! Here are your top friends, ranked by # of direct messages: \n')
+print('************************************************************')
+print('************************************************************', end='')
 
+count = 1
 for item in sorted_messages_by_friend:
-    print('\n' + item + ': ' + str(sorted_messages_by_friend[item]))
+    print('\n' + str(count) + ': ' + item + ': ' + str(sorted_messages_by_friend[item]))
+    if count == 5:
+        print('************************************************************')
+        print('************************************************************')
+        input('Press Enter to show full rankings: ')
+    count += 1
 
 
 
