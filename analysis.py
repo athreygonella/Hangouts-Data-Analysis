@@ -11,8 +11,6 @@ try:
 except FileNotFoundError:
     print('Takeout/Hangouts/Hangouts.json file was not found. Please make sure that the current directory contains Takeout directory')
 
-user_name = input('\nWelcome to Hangouts Wrapped!! What\'s your name? ')
-
 # Construct Map [gaia ID -> name]
 ID_to_name = {}
 for conversation in data['conversations']:
@@ -25,7 +23,10 @@ for conversation in data['conversations']:
             # Check that name isn't an email address
             if '@' not in name:
                 ID_to_name[gaia_id] = name
-            
+
+# Automatically determine user's name
+user_ID = data['conversations'][0]['conversation']['conversation']['self_conversation_state']['self_read_state']['participant_id']['gaia_id']
+user_name = ID_to_name[user_ID]
 
 # Map [Friend Name -> # of direct messages]
 messages_by_friend = {}

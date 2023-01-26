@@ -4,7 +4,8 @@
 
 ### Functionality:  
   - Ranks all text recipients by # of direct messages and highlights top 5 friends
-  - *Coming Soon*
+  - Ranks top 10 group chats that you've been most active in
+  - Ranks top 10 most active group chats by total # of messages
 
 ## Usage
   1. Clone this repository or download & extract zip
@@ -13,3 +14,5 @@
   4. Follow instructions and export data (this should usually take ~30 minutes to an hour)
   5. Unzip downloaded zip file and move Takeout folder so that it's in the same directory as 'analysis.py'
   6. Open Terminal, `cd` to the directory and run `python3 analysis.py` 
+
+  Developed by Athrey Gonella
