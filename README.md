@@ -12,7 +12,7 @@
   2. Login to https://takeout.google.com
   3. Select data to download (deselect all except for Hangouts)
   4. Follow instructions and export data (this should usually take ~30 minutes to an hour)
-  5. Unzip downloaded zip file and move Takeout folder so that it's in the same directory as 'analysis.py'
-  6. Open Terminal, `cd` to the directory and run `python3 analysis.py` 
+  5. Unzip downloaded zip file and move Takeout folder so that it's in the same directory as 'menu.py'
+  6. Open Terminal, `cd` to the directory and run `python3 menu.py` 
 
   Developed by Athrey Gonella

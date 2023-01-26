@@ -1,15 +1,11 @@
-# Code for processing Hangouts JSON data
-# 
-# Author: Athrey Gonella
-
 
 import json
 
 try:
-    file = open("Takeout/Hangouts/Hangouts.json", 'r')
+    file = open('Takeout/Hangouts/Hangouts.json', 'r')
     data = json.load(file)
 except FileNotFoundError:
-    print('Takeout/Hangouts/Hangouts.json file was not found. Please make sure that the current directory contains Takeout directory')
+    print('Error: Takeout/Hangouts/Hangouts.json file was not found. Please make sure that the current directory contains Takeout directory')
 
 # Construct Map [gaia ID -> name]
 ID_to_name = {}
@@ -31,7 +27,7 @@ user_name = ID_to_name[user_ID]
 # Map [Friend Name -> # of direct messages]
 messages_by_friend = {}
 
-# Map [Group Name -> # of messages sent by user]
+# Map [Group Name -> [# of messages sent by user, total # of chat messages]
 group_chat_map = {}
 
 for conversation in data['conversations']:
@@ -83,57 +79,4 @@ sorted_messages_by_friend = dict(sorted(messages_by_friend.items(), key = lambda
 sorted_group_chats_by_num_messages_from_user = dict(sorted(group_chat_map.items(), key = lambda item: item[1], reverse=True))
 
 sorted_group_chats_by_num_total_messages = dict(sorted(group_chat_map.items(), key = lambda item: item[1][1], reverse=True))
-
-
-
-# Print results for [1]: Friends Ranking
-print('\nHi ' + user_name + '! Here are your top friends, ranked by # of direct messages: \n')
-print('************************************************************')
-print('************************************************************', end='')
-
-count = 1
-for item in sorted_messages_by_friend:
-    print('\n' + str(count) + '. ' + item + ': ' + str(sorted_messages_by_friend[item]))
-    if count == 5:
-        print('************************************************************')
-        print('************************************************************')
-        input('Press Enter to show full rankings: ')
-    count += 1
-
-
-# Print results for [2]: Group Chat Involvement
-print('\nHi ' + user_name + '! Here are the top 10 group chats that you\'ve been most involved in: \n')
-print('************************************************************')
-print('************************************************************', end='')
-
-count = 1
-for item in sorted_group_chats_by_num_messages_from_user:
-    print('\n' + str(count) + '. You\'ve sent ' + str(sorted_group_chats_by_num_messages_from_user[item][0]) + ' messages in ' + item)
-    if count == 10:
-        print('************************************************************')
-        print('************************************************************')
-        break
-    count += 1
-
-
-# Print results for [3]: Group Chat Involvement
-print('\nHi ' + user_name + '! Here are the top 10 most active group chats that you\'re in: \n')
-print('************************************************************')
-print('************************************************************', end='')
-
-count = 1
-for item in sorted_group_chats_by_num_total_messages:
-    print('\n' + str(count) + '. ' + str(sorted_group_chats_by_num_total_messages[item][1]) + ' total messages in ' + item)
-    if count == 10:
-        print('************************************************************')
-        print('************************************************************')
-        break
-    count += 1
-
-
-
-
-
-
-# TODO: get name from JSON, not from input
 
