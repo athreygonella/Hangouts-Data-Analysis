@@ -27,7 +27,7 @@ user_name = ID_to_name[user_ID]
 # Map [Friend Name -> # of direct messages]
 messages_by_friend = {}
 
-# Map [Group Name -> [# of messages sent by user, total # of chat messages]
+# Map [Group Name -> [# of messages sent by user, total # of chat messages]]
 group_chat_map = {}
 
 for conversation in data['conversations']:
@@ -57,7 +57,7 @@ for conversation in data['conversations']:
             chat_name = conversation_metadata['conversation']['name']
         except KeyError:
             # (Caused by no name attribute)
-            participant_names = [ID_to_name[id] for id in participant_IDs]
+            participant_names = [ID_to_name[id] if id in ID_to_name else 'Unknown User' for id in participant_IDs]
             chat_name = 'Chat with ' + ', '.join(participant_names)
 
         total_chat_messages = 0

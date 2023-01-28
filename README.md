@@ -1,6 +1,8 @@
 # Hangouts Wrapped
 
-**A script that parses through chat data from Google Hangouts (which was retired by Google in 2022) and returns interesting data and insights.**  
+**A script that parses through chat data from Google Hangouts (which was retired by Google in 2022) and returns interesting data and insights.**
+
+Note: In order to use this script, you should have your Hangouts data downloaded prior to Jan 1st, 2023. Starting on this date, Google has initiated deletion of Hangouts data from their servers, so there is no guarantee that your data is still available (you can check by trying to export data from https://takeout.google.com). 
 
 ### Functionality:  
   - Ranks all text recipients by # of direct messages and highlights top 5 friends
@@ -9,10 +11,7 @@
 
 ## Usage
   1. Clone this repository or download & extract zip
-  2. Login to https://takeout.google.com
-  3. Select data to download (deselect all except for Hangouts)
-  4. Follow instructions and export data (this should usually take ~30 minutes to an hour)
-  5. Unzip downloaded zip file and move Takeout folder so that it's in the same directory as 'menu.py'
-  6. Open Terminal, `cd` to the directory and run `python3 menu.py` 
+  2. Place **Takeout** folder (which contains data exported from Google) into the **Hangouts-Wrapped-main** folder that was just downloaded
+  3. Open Terminal, `cd` to **Hangouts-Wrapped-main** directory and run `python3 menu.py` 
 
   Developed by Athrey Gonella
