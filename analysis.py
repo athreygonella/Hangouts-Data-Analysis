@@ -2,7 +2,7 @@
 import json
 
 try:
-    file = open('Takeout/Hangouts/Hangouts.json', 'r')
+    file = open('Takeout/Hangouts/Hangouts.json', 'r', encoding='utf-8')
     data = json.load(file)
 except FileNotFoundError:
     print('Error: Takeout/Hangouts/Hangouts.json file was not found. Please make sure that the current directory contains Takeout directory')
